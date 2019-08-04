@@ -18,16 +18,25 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Hook_BaseClass.h" />
+    <ClInclude Include="Hook_SendMsg.h" />
+    <ClInclude Include="Offsets_2_6_8_51.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Hook_BaseClass.cpp" />
+    <ClCompile Include="Hook_SendMsg.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{FBBCFFF2-42B9-4857-8E10-5A8FBE3F9F6A}</ProjectGuid>
+    <ProjectGuid>{34F17D6C-6E63-4A18-8F3F-2B797BB5BC0F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>WeChook</RootNamespace>
+    <RootNamespace>Hook</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -88,10 +97,9 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,23 +159,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="WeChook.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Hook\Hook.vcxproj">
-      <Project>{34f17d6c-6e63-4a18-8f3f-2b797bb5bc0f}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\MessageDispatcher\MessageDispatcher.vcxproj">
-      <Project>{eb5f2d71-2c57-4a82-b00c-f92fdc9b33aa}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Socket\Socket.vcxproj">
-      <Project>{f074e2ad-6ea1-469c-a1db-b4c9195752dd}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="json.hpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

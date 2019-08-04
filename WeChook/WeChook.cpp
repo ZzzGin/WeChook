@@ -1,21 +1,91 @@
-// WeChook.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-#include "pch.h"
 #include <iostream>
+#include <string>
+#include "json.hpp"
+#include "../Socket/Socket.h"
+#include "../MessageDispatcher/MessageDispatcher.h"
+#include "../Hook/Hook_SendMsg.h"
 
-int main()
+wchar_t * UTF8ToUnicode(const char* str)
 {
-    std::cout << "Hello World!\n"; 
+	int textlen = 0;
+	wchar_t * result;
+	textlen = MultiByteToWideChar(CP_UTF8, 0, str, -1, NULL, 0);
+	result = (wchar_t *)malloc((textlen + 1) * sizeof(wchar_t));
+	memset(result, 0, (textlen + 1) * sizeof(wchar_t));
+	MultiByteToWideChar(CP_UTF8, 0, str, -1, (LPWSTR)result, textlen);
+	return result;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+void th_MainLoop() {
+	Socket sock;
+	char recvBuffer[DEFAULT_BUFLEN];
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+	Hook_SendMsg hook_sm;
+
+	MessageDispatcher md;
+	md.addEntry("SendMessage", [&hook_sm](MessageDispatcher::DispArg args)->int
+	{
+		string wxid_str = args[0];
+		string msgContent_str = args[1];
+		char wxid_ch[0x50];
+		strcpy_s(wxid_ch, wxid_str.c_str());
+		char msgContent_ch[0x1000];
+		strcpy_s(msgContent_ch, msgContent_str.c_str());
+		wchar_t* wxid_wc = UTF8ToUnicode(wxid_ch);
+		wchar_t* msgContent_wc = UTF8ToUnicode(msgContent_ch);
+		//wcscpy_s(wxid_wc, char2wchar(wxid_ch));
+		//wcscpy_s(msgContent_wc, char2wchar(msgContent_ch));
+		hook_sm.SendTextMessage(wxid_wc, msgContent_wc);
+		delete wxid_wc;
+		delete msgContent_wc;
+		return 0;
+	});
+
+	while (1) {
+		int pullRet = sock.pull(recvBuffer, DEFAULT_BUFLEN);
+		if (pullRet <= 0)
+			break;
+
+		std::string so(recvBuffer);
+		auto j = nlohmann::json::parse(so);
+
+		string c = j["cmd"];
+		vector<string> a = j["args"];
+
+		md.runInThread(c, a);
+
+		int pushRet = sock.push(recvBuffer, pullRet);
+		if (pushRet == SOCKET_ERROR) {
+			break;
+		}
+	}
+	sock.~Socket();
+}
+
+BOOL WINAPI DllMain(
+	HINSTANCE hinstDLL,  // handle to DLL module
+	DWORD fdwReason,     // reason for calling function
+	LPVOID lpReserved)  // reserved
+{
+	// Perform actions based on the reason for calling.
+	switch (fdwReason)
+	{
+	case DLL_PROCESS_ATTACH:
+		CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)th_MainLoop, NULL, 0, NULL);
+		break;
+
+	case DLL_THREAD_ATTACH:
+		// Do thread-specific initialization.
+		break;
+
+	case DLL_THREAD_DETACH:
+		// Do thread-specific cleanup.
+		break;
+
+	case DLL_PROCESS_DETACH:
+		// Perform any necessary cleanup.
+		break;
+	}
+
+	return TRUE;  // Successful DLL_PROCESS_ATTACH.
+}

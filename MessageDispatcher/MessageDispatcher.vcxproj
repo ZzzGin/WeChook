@@ -20,14 +20,14 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{FBBCFFF2-42B9-4857-8E10-5A8FBE3F9F6A}</ProjectGuid>
+    <ProjectGuid>{EB5F2D71-2C57-4A82-B00C-F92FDC9B33AA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>WeChook</RootNamespace>
+    <RootNamespace>MessageDispatcher</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -88,10 +88,9 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;NOT_DEBUG_MESSAGEDISPATCHER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,21 +151,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="WeChook.cpp" />
+    <ClCompile Include="MessageDispatcher.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Hook\Hook.vcxproj">
-      <Project>{34f17d6c-6e63-4a18-8f3f-2b797bb5bc0f}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\MessageDispatcher\MessageDispatcher.vcxproj">
-      <Project>{eb5f2d71-2c57-4a82-b00c-f92fdc9b33aa}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Socket\Socket.vcxproj">
-      <Project>{f074e2ad-6ea1-469c-a1db-b4c9195752dd}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="json.hpp" />
+    <ClInclude Include="MessageDispatcher.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
