@@ -7,17 +7,19 @@
 
 using namespace std;
 
-class MessageDispatcher 
-{	
+class MessageDispatcher
+{
 public:
 	using DispArg = vector<string>;
 	using DispFun = function<int(DispArg)>;
 	void addEntry(string, DispFun);
 	void runInThread(string, DispArg);
+
 private:
 	unordered_map<
-		string, 
+		string,
 		DispFun
 	> dispatcher;
 	DispFun dispatch(string);
 };
+

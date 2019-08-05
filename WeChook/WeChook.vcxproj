@@ -159,7 +159,7 @@
       <Project>{34f17d6c-6e63-4a18-8f3f-2b797bb5bc0f}</Project>
     </ProjectReference>
     <ProjectReference Include="..\MessageDispatcher\MessageDispatcher.vcxproj">
-      <Project>{eb5f2d71-2c57-4a82-b00c-f92fdc9b33aa}</Project>
+      <Project>{24b6fbbd-52a1-4a02-a042-066301adc7e9}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Socket\Socket.vcxproj">
       <Project>{f074e2ad-6ea1-469c-a1db-b4c9195752dd}</Project>

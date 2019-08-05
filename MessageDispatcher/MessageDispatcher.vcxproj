@@ -18,9 +18,15 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MessageDispatcher.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MessageDispatcher.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{EB5F2D71-2C57-4A82-B00C-F92FDC9B33AA}</ProjectGuid>
+    <ProjectGuid>{24B6FBBD-52A1-4A02-A042-066301ADC7E9}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>MessageDispatcher</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
@@ -150,12 +156,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="MessageDispatcher.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="MessageDispatcher.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

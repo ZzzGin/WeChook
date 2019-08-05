@@ -24,12 +24,18 @@
     <ClInclude Include="Hook_SendMsg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Hook_RecvMsg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Hook_BaseClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Hook_SendMsg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hook_RecvMsg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

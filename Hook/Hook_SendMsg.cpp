@@ -1,7 +1,5 @@
 #include "Hook_SendMsg.h"
 
-
-
 Hook_SendMsg::Hook_SendMsg()
 {
 }

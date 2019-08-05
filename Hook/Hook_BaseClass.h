@@ -11,8 +11,9 @@ struct wxStr {
 
 class Hook_BaseClass
 {
-private:
+protected:
 	DWORD WeChatWinAddr = 0;
+
 public:
 	Hook_BaseClass();
 	~Hook_BaseClass();

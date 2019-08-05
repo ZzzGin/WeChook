@@ -15,7 +15,7 @@ try:
     # Send data
     a = 1
     while a == 1:
-	    message = ('{ \"cmd\": \"SendMessage\", \"args\": [\"4455503375@chatroom\", \"HelloFromDll!\"] }'+'\0').encode("utf-8")
+	    message = ('{ \"cmd\": \"SendMessage\", \"args\": [\"filehelper\", \"HelloFromDll!\"] }'+'\0').encode("utf-8")
 	    print('sending {!r}'.format(message.decode()))
 	    sock.sendall(message)
 

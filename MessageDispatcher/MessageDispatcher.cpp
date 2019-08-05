@@ -1,6 +1,6 @@
 #include "MessageDispatcher.h"
 
-void MessageDispatcher::addEntry(string cmd, 
+void MessageDispatcher::addEntry(string cmd,
 	DispFun func) {
 	dispatcher[cmd] = func;
 }
@@ -17,8 +17,10 @@ void MessageDispatcher::runInThread(string funcName,
 }
 
 #ifdef DEBUG_MESSAGEDISPATCHER
+
 #include <iostream>
 #include <Windows.h>
+
 int test1(MessageDispatcher::DispArg args) {
 	for (auto str : args) {
 		Sleep(1000);
@@ -47,5 +49,4 @@ int main() {
 	Sleep(10000);
 	return 0;
 }
-
 #endif // DEBUG_MESSAGEDISPATCHER

@@ -77,6 +77,7 @@ Socket::Socket()
 		WSACleanup();
 		return;
 	}
+	closesocket(ListenSocket);
 }
 
 Socket::~Socket()
