@@ -3,7 +3,9 @@
 #include "json.hpp"
 #include "../Socket/Socket.h"
 #include "../MessageDispatcher/MessageDispatcher.h"
+#include "../HooksManager/HooksManager.h"
 #include "../Hook/Hook_SendMsg.h"
+#include "../Hook/Hook_RecvMsg.h"
 
 wchar_t * UTF8ToUnicode(const char* str)
 {
@@ -21,6 +23,11 @@ void th_MainLoop() {
 	char recvBuffer[DEFAULT_BUFLEN];
 
 	Hook_SendMsg hook_sm;
+	Hook_RecvMsg hook_rm(&sock);
+
+	HooksManager hooksManager;
+	hooksManager.addHook(&hook_sm);
+	hooksManager.addHook(&hook_rm);
 
 	MessageDispatcher md;
 	md.addEntry("SendMessage", [&hook_sm](MessageDispatcher::DispArg args)->int
@@ -41,6 +48,8 @@ void th_MainLoop() {
 		return 0;
 	});
 
+	hooksManager.injectHooks();
+
 	while (1) {
 		int pullRet = sock.pull(recvBuffer, DEFAULT_BUFLEN);
 		if (pullRet <= 0)
@@ -59,6 +68,7 @@ void th_MainLoop() {
 			break;
 		}
 	}
+	hooksManager.ejectHooks();
 	sock.~Socket();
 }
 

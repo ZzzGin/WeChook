@@ -29,6 +29,11 @@
     <ClCompile Include="Hook_RecvMsg.cpp" />
     <ClCompile Include="Hook_SendMsg.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UTF8UnicodeConverter\UTF8UnicodeConverter.vcxproj">
+      <Project>{dc7637d0-989f-474e-899d-3a38792d6b57}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{34F17D6C-6E63-4A18-8F3F-2B797BB5BC0F}</ProjectGuid>

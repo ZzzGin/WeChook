@@ -20,14 +20,14 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{FBBCFFF2-42B9-4857-8E10-5A8FBE3F9F6A}</ProjectGuid>
+    <ProjectGuid>{DC7637D0-989F-474E-899D-3A38792D6B57}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>WeChook</RootNamespace>
+    <RootNamespace>UTF8UnicodeConverter</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -88,10 +88,9 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;NOT_DEBUG_UTF8UNICODECONVERTER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,24 +151,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="WeChook.cpp" />
+    <ClCompile Include="UTF8UnicodeConverter.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HooksManager\HooksManager.vcxproj">
-      <Project>{13668d06-f8de-42dc-b440-97c5555c3e63}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Hook\Hook.vcxproj">
-      <Project>{34f17d6c-6e63-4a18-8f3f-2b797bb5bc0f}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\MessageDispatcher\MessageDispatcher.vcxproj">
-      <Project>{24b6fbbd-52a1-4a02-a042-066301adc7e9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Socket\Socket.vcxproj">
-      <Project>{f074e2ad-6ea1-469c-a1db-b4c9195752dd}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="json.hpp" />
+    <ClInclude Include="UTF8UnicodeConverter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
