@@ -20,12 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Hook_BaseClass.h" />
+    <ClInclude Include="Hook_Eject.h" />
     <ClInclude Include="Hook_RecvMsg.h" />
     <ClInclude Include="Hook_SendMsg.h" />
     <ClInclude Include="Offsets_2_6_8_51.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Hook_BaseClass.cpp" />
+    <ClCompile Include="Hook_Eject.cpp" />
     <ClCompile Include="Hook_RecvMsg.cpp" />
     <ClCompile Include="Hook_SendMsg.cpp" />
   </ItemGroup>

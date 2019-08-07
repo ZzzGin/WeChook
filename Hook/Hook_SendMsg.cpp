@@ -1,7 +1,22 @@
+/*
+Hook of SendMessage
+input cmd: 
+	SendMessage
+input args:
+	string: wxid
+	string: message content
+
+output cmd:
+	SendMessage_R
+output args:
+	constant string: "Success"
+*/
+
 #include "Hook_SendMsg.h"
 
-Hook_SendMsg::Hook_SendMsg()
+Hook_SendMsg::Hook_SendMsg(Socket* s)
 {
+	sock = s;
 }
 
 
@@ -57,4 +72,20 @@ VOID Hook_SendMsg::SendTextMessage(wchar_t * wxid, wchar_t * message) {
 		call sendCall
 		add esp, 0xC
 	}
+	char sendBuffer[0x3000];
+	sprintf_s(sendBuffer,
+		"{ \"cmd\": \"SendMessage_R\", \"args\": [\"Success\"] }\0"
+	);
+	sock->push(sendBuffer, strlen(sendBuffer));
+}
+
+VOID Hook_SendMsg::SendStringMessage(std::string wxid_str, std::string msgContent_str) {
+	char wxid_ch[0x50];
+	strcpy_s(wxid_ch, wxid_str.c_str());
+	char msgContent_ch[0x1000];
+	strcpy_s(msgContent_ch, msgContent_str.c_str());
+	wchar_t* wxid_wc = UTF8ToUnicode(wxid_ch);
+	wchar_t* msgContent_wc = UTF8ToUnicode(msgContent_ch);
+	SendTextMessage(wxid_wc, msgContent_wc);
+	delete wxid_wc, msgContent_wc;
 }
